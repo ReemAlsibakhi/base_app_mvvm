@@ -32,7 +32,7 @@ class _PhotoScreenState extends State<PhotoScreen> {
     //  final vm = Provider.of<PhotoListVM>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Editors'),
+        title: const Text('Notes'),
       ),
       body: ChangeNotifierProvider<PhotoListVM>(
         create: (BuildContext context) => viewModel,

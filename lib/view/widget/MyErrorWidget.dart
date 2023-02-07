@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 class MyErrorWidget extends StatelessWidget {
   final String msg;
 
-  MyErrorWidget(this.msg);
+  const MyErrorWidget(this.msg, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Container(
-            child: Text(
+        child: Text(
       '$msg',
-    )));
+    ));
   }
 }
