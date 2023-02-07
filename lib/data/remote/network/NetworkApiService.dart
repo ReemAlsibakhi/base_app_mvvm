@@ -9,15 +9,15 @@ import 'BaseApiService.dart';
 
 class NetworkApiService extends BaseApiService {
   static const id = 'NetworkApiService';
+  dynamic responseJson;
   @override
   Future getResponse(String url) async {
-    dynamic responseJson;
     try {
       final response = await http.get(Uri.parse(Constants.baseUrl + url));
       responseJson = returnResponse(response);
-      print(id + responseJson);
+      print('NetworkApiService - reem');
     } on SocketException {
-      print(id + 'No Internet Connection');
+      print('${id}No Internet Connection');
       throw FetchDataException('No Internet Connection');
     }
     return responseJson;
@@ -37,9 +37,11 @@ class NetworkApiService extends BaseApiService {
   }
 
   dynamic returnResponse(http.Response response) {
+    print('status code ${response.statusCode}');
     switch (response.statusCode) {
       case 200:
-        dynamic responseJson = jsonDecode(response.body);
+        responseJson = jsonDecode(response.body);
+        print('responseJson  $responseJson');
         return responseJson;
       case 400:
         throw BadRequestException(response.toString());

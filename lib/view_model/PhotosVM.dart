@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:mvvm_design_patttern/model/PhotoModel.dart';
 import 'package:mvvm_design_patttern/repository/photos/PhotoRepo.dart';
 
 import '../data/remote/response/ApiResponse.dart';
+import '../model/PhotoModel.dart';
 
 /*
 view models that’ll be responsible for providing the data to the view.

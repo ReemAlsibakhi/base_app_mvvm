@@ -12,13 +12,11 @@ class PhotoRepo {
           await _apiService.getResponse(ApiEndPoints().getPhotos);
       print("photo Rep $response");
       final jsonData = PhotoModel.fromJson(response);
-      // return (json.decode(response.body.toString()) as List)
-      //     .map((i) => PhotoModel.fromJson(i))
-      //     .toList();
-      print('jsonData $jsonData');
+      print("photo Rep -reem $jsonData");
+
       return jsonData;
     } catch (e) {
-      print('exeption' + e.toString());
+      print('exeption error ' + e.toString());
       throw e;
     }
   }

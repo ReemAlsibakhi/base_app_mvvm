@@ -30,25 +30,24 @@ class _PhotoScreenState extends State<PhotoScreen> {
     //By adding the Provider inside the build method,
     // we ensure whenever notifyListener is fired, we have access to the instance of PhotoListViewModel.
     //  final vm = Provider.of<PhotoListVM>(context);
-
     return Scaffold(
       appBar: AppBar(
-        title: Text('Notes'),
+        title: Text('Editors'),
       ),
       body: ChangeNotifierProvider<PhotoListVM>(
         create: (BuildContext context) => viewModel,
         child: Consumer<PhotoListVM>(builder: (context, viewModel, _) {
-          print(viewModel.photoMain.data?.code);
+          //   print(viewModel.photoMain.data?);
           switch (viewModel.photoMain.status) {
             case Status.LOADING:
-              print("MARAJ :: LOADING");
+              print("Status :: LOADING");
               return LoadingWidget();
             case Status.ERROR:
-              print("MARAJ :: ERROR ");
+              print("Status :: ERROR ");
               return MyErrorWidget(viewModel.photoMain.message ?? "NA");
             case Status.COMPLETED:
-              print("MARAJ :: COMPLETED");
-              return _getPhotosListView(viewModel.photoMain.data!.data!);
+              print("Status :: COMPLETED");
+              return _getPhotosListView(viewModel.photoMain.data!.data!!);
             default:
           }
           return Container();
@@ -69,48 +68,10 @@ Widget _getPhotosListView(List<Photo> photoList) {
 Widget _getPhotoListItem(Photo item) {
   //card
   return ListTile(
-    // leading: CircleAvatar(
-    //   backgroundImage: NetworkImage(item.url.toString()),
-    // ),
-    subtitle: Text(item.identifier.toString()),
-    title: Text('Notes id:${item.englishName}'),
+    leading: CircleAvatar(
+      backgroundImage: NetworkImage(item.url.toString()),
+    ),
+    subtitle: Text(item.title.toString()),
+    title: Text('Notes id:${item.id}'),
   );
-}
-
-//
-// body: FutureBuilder<List<PhotoModel>>(
-// future: vm.fetchPhotos(),
-// builder: (context, snapshot) {
-// if (snapshot.hasError) {
-// return const Center(
-// child: Text('An error has occurred!'),
-// );
-// } else if (snapshot.hasData) {
-// return PhotosList(photos: snapshot.data!);
-// } else {
-// return const Center(
-// child: CircularProgressIndicator(),
-// );
-// }
-// },
-// )
-class PhotosList extends StatelessWidget {
-  const PhotosList({super.key, required this.photos});
-
-  final List<Photo> photos;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: photos.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            // leading: CircleAvatar(
-            //   backgroundImage: NetworkImage(photos[index].url.toString()),
-            // ),
-            subtitle: Text(photos[index].identifier.toString()),
-            title: Text('Notes id:${photos[index].englishName}'),
-          );
-        });
-  }
 }
